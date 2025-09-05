@@ -1,6 +1,6 @@
-# EJS
+# Sistema de información geográfica
 
-Ejemplo de uso de view engine `EJS`, para interactuar el cliente con el servidor
+Sistema de creación de objetos basado en informacion geografica colombiana
 
 ## Herramientas
 - Javascript

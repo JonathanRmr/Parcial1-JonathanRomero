@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./templates/header') %>
+    <body>
+        <div class="container">
+            <header>
+            </header>
+            <div class="card">
+                <div class="card-header">
+                    <h1>Sistema de Información Geográfica</h1>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <form action="/" method="get">
+                            <label for="filterDepartamento" class="form-label">Filtrar por Departamento:</label>
+                            <select id="filterDepartamento" name="departamento" class="form-select">
+                                <option value="">Todos</option>
+                                <% departments.forEach(dep => { %>
+                                    <option value="<%= dep.name %>"><%= dep.name %></option>
+                                <% }) %>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Filtrar</button>
+                        </form>
+                    </div>
+                    <% if (data.length > 0) { %>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Departamento</th>
+                                    <th scope="col">Municipio</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% data.forEach((record, index) => { %>
+                                    <tr>
+                                        <td><%= record.fecha %></td>
+                                        <td><%= record.departamento %></td>
+                                        <td><%= record.municipio %></td>
+                                        <td>
+                                            <form action="/delete-record" method="post">
+                                                <input type="hidden" name="index" value="<%= index %>">
+                                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    <% } else { %>
+                        <h3>No hay Registros</h3>
+                    <% } %>
+                    <a href="/new-record" class="btn btn-secondary">Nuevo Registro</a>
+                </div>
+                <div class="card-footer">Pie de página</div>
+            </div>
+            <footer>
+                <%- include('./templates/footer') %>
+            </footer>
+        </div>
+    </body>
+</html>
